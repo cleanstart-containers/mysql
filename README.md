@@ -5,7 +5,8 @@ The CleanStart Mysql image provides a production-ready, security-hardened databa
 📌 **Base Foundation**: Security-hardened, minimal base OS designed for enterprise containerized environments.
 
 **Image Path**: `mysql`
-**Registry**: cleanstart Registry
+
+**Registry**: `cleanstart`
 
 ## Key Features
 Core capabilities and strengths of this container
@@ -27,20 +28,17 @@ Typical scenarios where this container excels
 Download the container image from the registry
 
 ```bash
-docker pull cleanstart/mysql:mysql
+docker pull cleanstart/mysql:latest
 ```
 ```bash
-docker pull cleanstart/mysql:container
-```
-```bash
-docker pull cleanstart/mysql:enterprise
+docker pull cleanstart/mysql:latest-dev
 ```
 
 ## Basic Run
 Run the container with basic configuration
 
 ```bash
-docker run -it --name mysql cleanstart/mysql:latest
+docker run -it --name mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=yes cleanstart/mysql:latest
 ```
 
 ## Production Deployment
@@ -49,21 +47,26 @@ Deploy with production security settings
 ```bash
 docker run -d --name mysql-prod \
   --security-opt=no-new-privileges \
-  --user 1000:1000 \
   --restart unless-stopped \
+  -e MYSQL_ALLOW_EMPTY_PASSWORD=yes \ 
   cleanstart/mysql:latest
 ```
 
 Volume Mount Mount local directory for persistent data
 
 ```bash
-docker run -v /app:/app cleanstart/mysql:latest
+docker run -d \
+  --name mysql-app \
+  -p 3306:3306 \
+  -v mysql-data:/var/lib/mysql \
+  -e MYSQL_ALLOW_EMPTY_PASSWORD=yes \
+  cleanstart/mysql:latest
 ```
 
 Port Forwarding Run with custom port mappings
 
 ```bash
-docker run -p 8080:8080 cleanstart/mysql:latest
+docker run -p 8080:8080 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes cleanstart/mysql:latest
 ```
 
 ## Environment Variables
@@ -71,9 +74,9 @@ Configuration options available through environment variables
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| PATH | /usr/local/sbin:/... | System PATH configuration |
-| POSTGRES_PASSWORD |  | Password for the PostgreSQL superuser |
-| POSTGRES_DB | postgres | Default database name |
+| PATH | /var/lib/mysql | System PATH configuration |
+| MYSQL_ROOT_PASSWORD |  | Password for the mysql superuser |
+| MYSQL_ALLOW_EMPTY_PASSWORD |  | no password |
 
 ## Security Best Practices
 Recommended security configurations and practices
