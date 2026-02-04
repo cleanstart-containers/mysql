@@ -48,7 +48,7 @@ Deploy with production security settings
 docker run -d --name mysql-prod \
   --security-opt=no-new-privileges \
   --restart unless-stopped \
-  -e MYSQL_ALLOW_EMPTY_PASSWORD=yes \ 
+  -e MYSQL_ROOT_PASSWORD=yourpassword \ 
   cleanstart/mysql:latest
 ```
 
