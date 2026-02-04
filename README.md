@@ -77,6 +77,7 @@ Configuration options available through environment variables
 | PATH | /var/lib/mysql | System PATH configuration |
 | MYSQL_ROOT_PASSWORD |  | Password for the mysql superuser |
 | MYSQL_ALLOW_EMPTY_PASSWORD |  | no password |
+| MYSQL_RANDOM_ROOT_PASSWORD |  | your password |
 
 ## Security Best Practices
 Recommended security configurations and practices
