@@ -4,9 +4,8 @@ The CleanStart Mysql image provides a production-ready, security-hardened databa
 
 📌 **Base Foundation**: Security-hardened, minimal base OS designed for enterprise containerized environments.
 
-**Image Path**: `mysql`
-
-**Registry**: `cleanstart`
+**Image Path**: `ghcr.io/cleanstart-containers/mysql`
+**Registry**: cleanstart Registry
 
 ## Key Features
 Core capabilities and strengths of this container
@@ -28,17 +27,20 @@ Typical scenarios where this container excels
 Download the container image from the registry
 
 ```bash
-docker pull ghcr.io/cleanstart-containers/mysql:latest
+docker pull ghcr.io/cleanstart-containers/mysql:mysql
 ```
 ```bash
-docker pull ghcr.io/cleanstart-containers/mysql:latest-dev
+docker pull ghcr.io/cleanstart-containers/mysql:container
+```
+```bash
+docker pull ghcr.io/cleanstart-containers/mysql:enterprise
 ```
 
 ## Basic Run
 Run the container with basic configuration
 
 ```bash
-docker run -it --name mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=yes ghcr.io/cleanstart-containers/mysql:latest
+docker run -it --name mysql ghcr.io/cleanstart-containers/mysql:latest
 ```
 
 ## Production Deployment
@@ -47,26 +49,21 @@ Deploy with production security settings
 ```bash
 docker run -d --name mysql-prod \
   --security-opt=no-new-privileges \
+  --user 1000:1000 \
   --restart unless-stopped \
-  -e MYSQL_ROOT_PASSWORD=yourpassword \ 
   ghcr.io/cleanstart-containers/mysql:latest
 ```
 
 Volume Mount Mount local directory for persistent data
 
 ```bash
-docker run -d \
-  --name mysql-app \
-  -p 3306:3306 \
-  -v mysql-data:/var/lib/mysql \
-  -e MYSQL_ALLOW_EMPTY_PASSWORD=yes \
-  ghcr.io/cleanstart-containers/mysql:latest
+docker run -v /app:/app ghcr.io/cleanstart-containers/mysql:latest
 ```
 
 Port Forwarding Run with custom port mappings
 
 ```bash
-docker run -p 8080:8080 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes ghcr.io/cleanstart-containers/mysql:latest
+docker run -p 8080:8080 ghcr.io/cleanstart-containers/mysql:latest
 ```
 
 ## Environment Variables
@@ -74,10 +71,9 @@ Configuration options available through environment variables
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| PATH | /var/lib/mysql | System PATH configuration |
-| MYSQL_ROOT_PASSWORD |  | Password for the mysql superuser |
-| MYSQL_ALLOW_EMPTY_PASSWORD |  | no password |
-| MYSQL_RANDOM_ROOT_PASSWORD |  | your password |
+| PATH | /usr/local/sbin:/... | System PATH configuration |
+| POSTGRES_PASSWORD |  | Password for the PostgreSQL superuser |
+| POSTGRES_DB | postgres | Default database name |
 
 ## Security Best Practices
 Recommended security configurations and practices
