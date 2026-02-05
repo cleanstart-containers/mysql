@@ -5,6 +5,7 @@ The CleanStart Mysql image provides a production-ready, security-hardened databa
 📌 **Base Foundation**: Security-hardened, minimal base OS designed for enterprise containerized environments.
 
 **Image Path**: `ghcr.io/cleanstart-containers/mysql`
+
 **Registry**: `cleanstart`
 
 ## Key Features
