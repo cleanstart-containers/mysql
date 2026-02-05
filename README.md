@@ -28,17 +28,17 @@ Typical scenarios where this container excels
 Download the container image from the registry
 
 ```bash
-docker pull cleanstart/mysql:latest
+docker pull ghcr.io/cleanstart-containers/mysql:latest
 ```
 ```bash
-docker pull cleanstart/mysql:latest-dev
+docker pull ghcr.io/cleanstart-containers/mysql:latest-dev
 ```
 
 ## Basic Run
 Run the container with basic configuration
 
 ```bash
-docker run -it --name mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=yes cleanstart/mysql:latest
+docker run -it --name mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=yes ghcr.io/cleanstart-containers/mysql:latest
 ```
 
 ## Production Deployment
@@ -49,7 +49,7 @@ docker run -d --name mysql-prod \
   --security-opt=no-new-privileges \
   --restart unless-stopped \
   -e MYSQL_ROOT_PASSWORD=yourpassword \ 
-  cleanstart/mysql:latest
+  ghcr.io/cleanstart-containers/mysql:latest
 ```
 
 Volume Mount Mount local directory for persistent data
@@ -60,13 +60,13 @@ docker run -d \
   -p 3306:3306 \
   -v mysql-data:/var/lib/mysql \
   -e MYSQL_ALLOW_EMPTY_PASSWORD=yes \
-  cleanstart/mysql:latest
+  ghcr.io/cleanstart-containers/mysql:latest
 ```
 
 Port Forwarding Run with custom port mappings
 
 ```bash
-docker run -p 8080:8080 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes cleanstart/mysql:latest
+docker run -p 8080:8080 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes ghcr.io/cleanstart-containers/mysql:latest
 ```
 
 ## Environment Variables
