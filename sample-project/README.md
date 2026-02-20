@@ -79,8 +79,3 @@ docker exec mysql-demo mysql -u root -proot123 -e "SELECT * FROM demodb.products
 docker stop mysql-demo
 docker rm mysql-demo
 ```
-
-## Resources
-
-- [CleanStart](https://cleanstart.com/)
-- [MySQL Documentation](https://dev.mysql.com/doc/)
